@@ -1,22 +1,32 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+        <link href="/static/css/style.css" rel="stylesheet">
         <title>Steam Game Comparing</title>
     </head>
     <body>
-        <h2>Steam Game Comparing:</h2>
-        <form method="POST">
+        <header class="w3-container w3-black">
+            <h2>steam game comparing:</h2>
+        </header>
+        <div class="w3-container w3-center">
+            <form method="POST">
+                <div class="steamurl-input">
+                    <label>Enter the URLs for the two games you wish to compare:</label> <br />
+                    <input type="text" class="form-control w3-input w3-border" name="url1"> <br/>
+                    <input type="text" class="form-control w3-input w3-border" name="url2">
+                </div>
+                <p>
+                    What game sounds more <input type="text" class="form-control word-picker" name="questionInput">?
+                </p>
+                <input class="w3-button w3-black w3-round" type="submit" value="Submit">
+            </form>
             <p>
-                <label>Enter the URL for the two games you wish to compare:</label> <br />
-                <input type="text" class="form-control" name="url1"> <br/>
-                <input type="text" class="form-control" name="url2">
+                <b>{{ answer }}</b>
             </p>
-            <p>
-                What game sounds more <input type="text" class="form-control" name="questionInput">?
-            </p>
-            <input type="submit" value="Submit">
-        </form>
-        <p>
-            {{ answer }}
-        </p>
+        </div>
     </body>
 </html>  

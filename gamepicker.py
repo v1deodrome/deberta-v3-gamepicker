@@ -62,7 +62,7 @@ def home():
 
             ai_answer = pickGame(appid_1,appid_2,questionInput)
 
-            return render_template('index.html', answer=f"I think {ai_answer['answer']} is more {questionInput}")
+            return render_template('index.html', answer=f"I think {ai_answer['answer']} is more {questionInput}.")
         else:
             return render_template('index.html', answer="Sorry, I think your inputs are invalid.")
 
