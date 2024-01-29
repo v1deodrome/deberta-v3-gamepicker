@@ -18,8 +18,6 @@ def cleanhtml(raw_html):
     cleantext = re.sub(CLEANR, '', raw_html)
     return cleantext
 
-
-
 # summarize the description of two games, and compare them to see which one is "the most interesting"
 def pickGame(appid_1,appid_2,questionInput):
     print("Reading JSON data...")
