@@ -18,27 +18,27 @@ def cleanhtml(raw_html):
     cleantext = re.sub(CLEANR, '', raw_html)
     return cleantext
 
-# summarize the description of two games, and compare them to see which one is "the most interesting"
+# summarize the description of two games, and compare them to see which one is "the most _______"
 def pickGame(appid_1,appid_2,questionInput):
     print("Reading JSON data...")
     # get json data from game 1 and 2
-    with urlopen("https://store.steampowered.com/api/appdetails?appids={0}".format(appid_1)) as url:
+    with urlopen(f"https://store.steampowered.com/api/appdetails?appids={appid_1}") as url:
         game1_data = json.load(url)[appid_1]['data']
 
-    with urlopen("https://store.steampowered.com/api/appdetails?appids={0}".format(appid_2)) as url:
+    with urlopen(f"https://store.steampowered.com/api/appdetails?appids={appid_2}") as url:
         game2_data = json.load(url)[appid_2]['data']
 
     # ask question
     print("Querying...")
     return qa_model(
-        question = "What game sounds more {0}, {1} or {2}?".format(questionInput,game1_data['name'],game2_data['name']),
+        question = f"What game sounds more {questionInput}, {game1_data['name']} or {game2_data['name']}?",
         context = "The description for {0} reads: '{1}' The description for {2} reads '{3}'".format(
             game1_data['name'],
             cleanhtml(game1_data['detailed_description']),
             game2_data['name'],
             cleanhtml(game2_data['detailed_description'])
         )
-    )['answer']
+    )
 
 # ------ FLASK STUFF BEGINS HERE ------
 app = Flask(__name__)
@@ -55,13 +55,14 @@ def home():
         appid_1 = regex.search(request.form['url1'])
         appid_2 = regex.search(request.form['url2'])
 
-        if appid_1 and appid_2:
+        # appids and questionInput do not work as parameters if they're null
+        if appid_1 and appid_2 and questionInput:
             appid_1 = appid_1.group(1)
             appid_2 = appid_2.group(1)
 
-            ai_answer = f"I think {pickGame(appid_1,appid_2,questionInput)} is more {questionInput}."
+            ai_answer = pickGame(appid_1,appid_2,questionInput)
 
-            return render_template('index.html', answer=ai_answer)
+            return render_template('index.html', answer=f"I think {ai_answer['answer']} is more {questionInput}")
         else:
             return render_template('index.html', answer="Sorry, I think your inputs are invalid.")
 
