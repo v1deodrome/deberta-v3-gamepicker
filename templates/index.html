@@ -1,8 +1,22 @@
 <html>
     <head>
-        <title>Flask Test</title>
+        <title>Steam Game Comparing</title>
     </head>
     <body>
-        <h1>Index page</h1>
+        <h2>Steam Game Comparing:</h2>
+        <form method="POST">
+            <p>
+                <label>Enter the URL for the two games you wish to compare:</label> <br />
+                <input type="text" class="form-control" name="url1"> <br/>
+                <input type="text" class="form-control" name="url2">
+            </p>
+            <p>
+                What game sounds more <input type="text" class="form-control" name="questionInput">?
+            </p>
+            <input type="submit" value="Submit">
+        </form>
+        <p>
+            {{ answer }}
+        </p>
     </body>
 </html>  
