@@ -5,8 +5,6 @@ import json
 import re
 
 # ------ necessary AI pipelines for this application ------
-# https://huggingface.co/facebook/bart-large-cnn
-summary_model = pipeline("summarization", model="facebook/bart-large-cnn")
 # https://huggingface.co/timpal0l/mdeberta-v3-base-squad2
 qa_model = pipeline("question-answering", "timpal0l/mdeberta-v3-base-squad2")
 # ---------------------------------------------------------
